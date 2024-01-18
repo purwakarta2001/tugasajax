@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIHAN AJAX</title>
+    <style>
+        li {
+            list-style-type: circle;
+            padding: 5px;
+            margin: 5px;
+            border: 2px solid red;
+            border-radius: 5px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="demo">
+        <h2>The XMLHttpRequest Object from File</h2>
+        <button type="button" onclick="loadDoc()">Load Document</button>
+    </div>
+    <div id="demo2"></div>
+    <script>
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();
+            xhttp.onload = function () {
+                var todolist = "<ul>";
+                var fileContent = this.responseText;
+                var textLines = fileContent.split("\n");
+                for (var i = 0, j = textLines.length; i < j; i++) {
+                    var currentLine = textLines[i];
+                    // for each line
+                    var list = "<li>" + currentLine + "</li>";
+                    todolist += list;
+                }
+                todolist += "</ul>";
+                document.getElementById("demo2").innerHTML = todolist;
+            }
+            xhttp.open("GET", "list.txt");
+            xhttp.send();
+        }
+    </script>
+
+</body>
+</html>
